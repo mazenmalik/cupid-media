@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class SecondPage extends StatefulWidget {
-  const SecondPage({super.key});
+  const SecondPage({super.key, required this.country, required this.state});
+  final String country;
+  final String state;
 
   @override
   State<SecondPage> createState() => _SecondPageState();
@@ -19,6 +21,18 @@ class _SecondPageState extends State<SecondPage> {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'You submitted',
+              style: TextStyle(fontSize: 25),
+            ),
+            Text('${widget.state}, ${widget.country}'),
+          ],
+        ),
       ),
     );
   }

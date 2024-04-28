@@ -11,6 +11,7 @@
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:cupid_media/presentation/pages/home_page.dart' as _i1;
 import 'package:cupid_media/presentation/pages/second_page.dart' as _i2;
+import 'package:flutter/material.dart' as _i4;
 
 abstract class $AppRouter extends _i3.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -24,9 +25,14 @@ abstract class $AppRouter extends _i3.RootStackRouter {
       );
     },
     SecondRoute.name: (routeData) {
+      final args = routeData.argsAs<SecondRouteArgs>();
       return _i3.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.SecondPage(),
+        child: _i2.SecondPage(
+          key: args.key,
+          country: args.country,
+          state: args.state,
+        ),
       );
     },
   };
@@ -48,14 +54,43 @@ class HomeRoute extends _i3.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.SecondPage]
-class SecondRoute extends _i3.PageRouteInfo<void> {
-  const SecondRoute({List<_i3.PageRouteInfo>? children})
-      : super(
+class SecondRoute extends _i3.PageRouteInfo<SecondRouteArgs> {
+  SecondRoute({
+    _i4.Key? key,
+    required String country,
+    required String state,
+    List<_i3.PageRouteInfo>? children,
+  }) : super(
           SecondRoute.name,
+          args: SecondRouteArgs(
+            key: key,
+            country: country,
+            state: state,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'SecondRoute';
 
-  static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
+  static const _i3.PageInfo<SecondRouteArgs> page =
+      _i3.PageInfo<SecondRouteArgs>(name);
+}
+
+class SecondRouteArgs {
+  const SecondRouteArgs({
+    this.key,
+    required this.country,
+    required this.state,
+  });
+
+  final _i4.Key? key;
+
+  final String country;
+
+  final String state;
+
+  @override
+  String toString() {
+    return 'SecondRouteArgs{key: $key, country: $country, state: $state}';
+  }
 }

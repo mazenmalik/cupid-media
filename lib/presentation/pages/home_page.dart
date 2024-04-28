@@ -20,6 +20,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? stateHasValue, countryHasValue;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +52,12 @@ class _HomePageState extends State<HomePage> {
                   items: data,
                   displayKey: 'value',
                   onChanged: (value) {
+                    countryHasValue = data.firstWhere(
+                      (element) => element['id'] == value,
+                    )['value'];
+                    setState(() {
+                      stateHasValue = null;
+                    });
                     context
                         .read<StateBloc>()
                         .add(OnGetState(int.parse(value.toString())));
@@ -75,19 +83,28 @@ class _HomePageState extends State<HomePage> {
                       hintText: 'State',
                       items: data,
                       displayKey: 'value',
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        setState(() {
+                          stateHasValue = data.firstWhere(
+                            (element) => element['id'] == value,
+                          )['value'];
+                        });
+                      },
                     ),
+                    const SizedBox(height: 100),
+                    PrimaryButton(
+                        enable: stateHasValue != null,
+                        onPressed: () {
+                          AutoRouter.of(context).push(SecondRoute(
+                              country: countryHasValue.toString(),
+                              state: stateHasValue.toString()));
+                        },
+                        text: 'Submit')
                   ],
                 );
               }
               return Container();
             }),
-            PrimaryButton(
-                enable: true,
-                onPressed: () {
-                  AutoRouter.of(context).push(const SecondRoute());
-                },
-                text: 'Submit')
           ],
         ),
       ),
