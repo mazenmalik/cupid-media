@@ -3,7 +3,7 @@ Hello!
 Here's my attempt to solve this test.
 
 Overview:
-I build a one page app with cascading dropdowns using Clean Architecture and flutter_bloc as my state managent. This is to make sure that the app is easier to maintain, scale and testable.
+I build with cascading dropdowns using Clean Architecture and flutter_bloc as my state managent. This is to make sure that the app is easier to maintain, scale and testable.
 
 #### Requirements:
 
@@ -52,9 +52,9 @@ Commit Messages
 
 Key points:
 I used two blocs to separate the state of countries and states/cities. So they are independent of one another.
-I used http package for network for an easier approach on testing repositories and other data related files.
+I used http package for an easier approach on testing repositories and other data related files.
 
-Note: to make it secure i would place api credentials in .ENV and add it to .getignore for a better security. I would have use dotenv package for this and send .ENV to fellow devs.
+Note: to make it secure i would place api credentials in .ENV and add it to .getignore. I would have use dotenv package for this and send .ENV to fellow devs.
 
 If you have any questions or need assistance, please feel free to contact me at malikmazen@gmail.com.
 
