@@ -3,7 +3,7 @@ Hello!
 Here's my attempt to solve this test.
 
 Overview:
-I build a one page app with cascading dropdowns using Clean Architecture and flutter_bloc as my state managent. This is to make sure that the app is easier to maintain, scale and testable.
+I build an app with cascading dropdowns using Clean Architecture, flutter_bloc as my state managent and auto_route for navigation. This is to make sure that the app is easier to maintain, scale and testable.
 
 #### Requirements:
 
