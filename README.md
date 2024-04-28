@@ -40,13 +40,15 @@ Made sure to perform unit test on all files that are testable with the help test
 GIT
 
 Branch Naming
-feat/ feature_name
-chore/ part of the feature but in a separate branch
+
+- feat/ feature_name
+- chore/ part of the feature but in a separate branch
 
 Commit Messages
-fix: fixing something
-chore: task
-merge: merging a branch to another
+
+- fix: fixing something
+- chore: task
+- merge: merging a branch to another
 
 Key points:
 I used two blocs to separate the state of countries and states/cities. So they are independent of one another.
@@ -56,6 +58,6 @@ Note: to make it secure i would place api credentials in .ENV and add it to .get
 
 If you have any questions or need assistance, please feel free to contact me at malikmazen@gmail.com.
 
-Excited to work you soon. Thank you!
+Excited to work with you soon. Thank you!
 
 - Mazen Malik
