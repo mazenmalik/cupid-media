@@ -20,7 +20,7 @@ class StateBloc extends Bloc<StateEvent, StateState> {
           },
         );
       },
-      transformer: debounce(const Duration(milliseconds: 100)),
+      transformer: debounce(const Duration(milliseconds: 50)),
     );
   }
 }
