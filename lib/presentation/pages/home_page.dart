@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:cupid_media/config/route/app_router.gr.dart';
+import 'package:cupid_media/core/utils/widgets/button/primary_button.dart';
 import 'package:cupid_media/presentation/bloc/country/country_bloc.dart';
 import 'package:cupid_media/presentation/bloc/country/country_state.dart';
 import 'package:cupid_media/presentation/bloc/state/state_bloc.dart';
@@ -6,9 +9,9 @@ import 'package:cupid_media/presentation/bloc/state/state_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../core/utils/widgets/dropdown/dropdown.dart';
 
+@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -17,6 +20,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? stateHasValue, countryHasValue;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +52,12 @@ class _HomePageState extends State<HomePage> {
                   items: data,
                   displayKey: 'value',
                   onChanged: (value) {
+                    countryHasValue = data.firstWhere(
+                      (element) => element['id'] == value,
+                    )['value'];
+                    setState(() {
+                      stateHasValue = null;
+                    });
                     context
                         .read<StateBloc>()
                         .add(OnGetState(int.parse(value.toString())));
@@ -66,11 +77,30 @@ class _HomePageState extends State<HomePage> {
               if (state is StateLoaded) {
                 List<Map<String, dynamic>> data =
                     state.result.map((state) => state.toMap()).toList();
-                return ReusableDropdown(
-                  hintText: 'State',
-                  items: data,
-                  displayKey: 'value',
-                  onChanged: (value) {},
+                return Column(
+                  children: [
+                    ReusableDropdown(
+                      hintText: 'State',
+                      items: data,
+                      displayKey: 'value',
+                      onChanged: (value) {
+                        setState(() {
+                          stateHasValue = data.firstWhere(
+                            (element) => element['id'] == value,
+                          )['value'];
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 100),
+                    PrimaryButton(
+                        enable: stateHasValue != null,
+                        onPressed: () {
+                          AutoRouter.of(context).push(SecondRoute(
+                              country: countryHasValue.toString(),
+                              state: stateHasValue.toString()));
+                        },
+                        text: 'Submit')
+                  ],
                 );
               }
               return Container();
